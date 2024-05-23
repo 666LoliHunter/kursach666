@@ -34,10 +34,6 @@
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.model = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gBoxSQL = new System.Windows.Forms.GroupBox();
-            this.btnSQL = new System.Windows.Forms.Button();
-            this.tBoxSQL = new System.Windows.Forms.TextBox();
-            this.lSQL = new System.Windows.Forms.Label();
             this.gBoxFilters = new System.Windows.Forms.GroupBox();
             this.gBoxOrderPrice = new System.Windows.Forms.GroupBox();
             this.tBoxPriceFilter = new System.Windows.Forms.TextBox();
@@ -45,14 +41,13 @@
             this.rBOrderPriceHigh = new System.Windows.Forms.RadioButton();
             this.rBOrderPriceDown = new System.Windows.Forms.RadioButton();
             this.gBoxType = new System.Windows.Forms.GroupBox();
+            this.lBType = new System.Windows.Forms.ListBox();
             this.lType = new System.Windows.Forms.Label();
             this.gBoxProd = new System.Windows.Forms.GroupBox();
             this.lProd = new System.Windows.Forms.Label();
             this.lBProd = new System.Windows.Forms.ListBox();
-            this.lBType = new System.Windows.Forms.ListBox();
-            this.btnClearSQL = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVTable)).BeginInit();
-            this.gBoxSQL.SuspendLayout();
             this.gBoxFilters.SuspendLayout();
             this.gBoxOrderPrice.SuspendLayout();
             this.gBoxType.SuspendLayout();
@@ -110,64 +105,21 @@
             this.price.Name = "price";
             this.price.Width = 200;
             // 
-            // gBoxSQL
-            // 
-            this.gBoxSQL.Controls.Add(this.btnSQL);
-            this.gBoxSQL.Controls.Add(this.tBoxSQL);
-            this.gBoxSQL.Controls.Add(this.lSQL);
-            this.gBoxSQL.Location = new System.Drawing.Point(60, 454);
-            this.gBoxSQL.Margin = new System.Windows.Forms.Padding(6);
-            this.gBoxSQL.Name = "gBoxSQL";
-            this.gBoxSQL.Padding = new System.Windows.Forms.Padding(6);
-            this.gBoxSQL.Size = new System.Drawing.Size(1084, 119);
-            this.gBoxSQL.TabIndex = 1;
-            this.gBoxSQL.TabStop = false;
-            // 
-            // btnSQL
-            // 
-            this.btnSQL.Location = new System.Drawing.Point(922, 46);
-            this.btnSQL.Margin = new System.Windows.Forms.Padding(6);
-            this.btnSQL.Name = "btnSQL";
-            this.btnSQL.Size = new System.Drawing.Size(150, 44);
-            this.btnSQL.TabIndex = 2;
-            this.btnSQL.Text = "Найти";
-            this.btnSQL.UseVisualStyleBackColor = true;
-            this.btnSQL.Click += new System.EventHandler(this.btnSQL_Click);
-            // 
-            // tBoxSQL
-            // 
-            this.tBoxSQL.Location = new System.Drawing.Point(80, 48);
-            this.tBoxSQL.Margin = new System.Windows.Forms.Padding(6);
-            this.tBoxSQL.Name = "tBoxSQL";
-            this.tBoxSQL.Size = new System.Drawing.Size(826, 31);
-            this.tBoxSQL.TabIndex = 1;
-            this.tBoxSQL.Text = "select * from printers";
-            // 
-            // lSQL
-            // 
-            this.lSQL.AutoSize = true;
-            this.lSQL.Location = new System.Drawing.Point(12, 54);
-            this.lSQL.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lSQL.Name = "lSQL";
-            this.lSQL.Size = new System.Drawing.Size(54, 25);
-            this.lSQL.TabIndex = 0;
-            this.lSQL.Text = "SQL";
-            // 
             // gBoxFilters
             // 
-            this.gBoxFilters.Controls.Add(this.btnClearSQL);
             this.gBoxFilters.Controls.Add(this.gBoxOrderPrice);
             this.gBoxFilters.Controls.Add(this.gBoxType);
             this.gBoxFilters.Controls.Add(this.gBoxProd);
-            this.gBoxFilters.Location = new System.Drawing.Point(60, 593);
+            this.gBoxFilters.Location = new System.Drawing.Point(60, 443);
             this.gBoxFilters.Name = "gBoxFilters";
-            this.gBoxFilters.Size = new System.Drawing.Size(1084, 427);
+            this.gBoxFilters.Size = new System.Drawing.Size(1084, 281);
             this.gBoxFilters.TabIndex = 2;
             this.gBoxFilters.TabStop = false;
             this.gBoxFilters.Text = "Фильтры";
             // 
             // gBoxOrderPrice
             // 
+            this.gBoxOrderPrice.Controls.Add(this.btnFilter);
             this.gBoxOrderPrice.Controls.Add(this.tBoxPriceFilter);
             this.gBoxOrderPrice.Controls.Add(this.label1);
             this.gBoxOrderPrice.Controls.Add(this.rBOrderPriceHigh);
@@ -185,7 +137,6 @@
             this.tBoxPriceFilter.Name = "tBoxPriceFilter";
             this.tBoxPriceFilter.Size = new System.Drawing.Size(141, 31);
             this.tBoxPriceFilter.TabIndex = 3;
-            this.tBoxPriceFilter.TextChanged += new System.EventHandler(this.tBoxPriceFilter_TextChanged);
             // 
             // label1
             // 
@@ -201,7 +152,7 @@
             this.rBOrderPriceHigh.AutoSize = true;
             this.rBOrderPriceHigh.Location = new System.Drawing.Point(13, 74);
             this.rBOrderPriceHigh.Name = "rBOrderPriceHigh";
-            this.rBOrderPriceHigh.Size = new System.Drawing.Size(210, 29);
+            this.rBOrderPriceHigh.Size = new System.Drawing.Size(204, 29);
             this.rBOrderPriceHigh.TabIndex = 1;
             this.rBOrderPriceHigh.TabStop = true;
             this.rBOrderPriceHigh.Text = "Сначала дороже";
@@ -213,7 +164,7 @@
             this.rBOrderPriceDown.AutoSize = true;
             this.rBOrderPriceDown.Location = new System.Drawing.Point(13, 33);
             this.rBOrderPriceDown.Name = "rBOrderPriceDown";
-            this.rBOrderPriceDown.Size = new System.Drawing.Size(223, 29);
+            this.rBOrderPriceDown.Size = new System.Drawing.Size(217, 29);
             this.rBOrderPriceDown.TabIndex = 0;
             this.rBOrderPriceDown.TabStop = true;
             this.rBOrderPriceDown.Text = "Сначала дешевле";
@@ -229,6 +180,20 @@
             this.gBoxType.Size = new System.Drawing.Size(274, 231);
             this.gBoxType.TabIndex = 3;
             this.gBoxType.TabStop = false;
+            // 
+            // lBType
+            // 
+            this.lBType.FormattingEnabled = true;
+            this.lBType.ItemHeight = 25;
+            this.lBType.Items.AddRange(new object[] {
+            "Лазерный",
+            "Струйный",
+            "МФУ"});
+            this.lBType.Location = new System.Drawing.Point(98, 27);
+            this.lBType.Name = "lBType";
+            this.lBType.Size = new System.Drawing.Size(149, 79);
+            this.lBType.TabIndex = 6;
+            this.lBType.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // lType
             // 
@@ -276,44 +241,27 @@
             this.lBProd.TabIndex = 5;
             this.lBProd.SelectedIndexChanged += new System.EventHandler(this.lBProd_SelectedIndexChanged);
             // 
-            // lBType
+            // btnFilter
             // 
-            this.lBType.FormattingEnabled = true;
-            this.lBType.ItemHeight = 25;
-            this.lBType.Items.AddRange(new object[] {
-            "Лазерный",
-            "Струйный",
-            "МФУ"});
-            this.lBType.Location = new System.Drawing.Point(98, 27);
-            this.lBType.Name = "lBType";
-            this.lBType.Size = new System.Drawing.Size(149, 79);
-            this.lBType.TabIndex = 6;
-            this.lBType.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // btnClearSQL
-            // 
-            this.btnClearSQL.Location = new System.Drawing.Point(17, 284);
-            this.btnClearSQL.Name = "btnClearSQL";
-            this.btnClearSQL.Size = new System.Drawing.Size(1055, 118);
-            this.btnClearSQL.TabIndex = 5;
-            this.btnClearSQL.Text = "Отчистить поле ввода SQL запроса";
-            this.btnClearSQL.UseVisualStyleBackColor = true;
-            this.btnClearSQL.Click += new System.EventHandler(this.btnClearSQL_Click);
+            this.btnFilter.Location = new System.Drawing.Point(13, 161);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(303, 45);
+            this.btnFilter.TabIndex = 4;
+            this.btnFilter.Text = "Отфильтровать";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1218, 1041);
+            this.ClientSize = new System.Drawing.Size(1218, 737);
             this.Controls.Add(this.gBoxFilters);
-            this.Controls.Add(this.gBoxSQL);
             this.Controls.Add(this.dGVTable);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Принтеры";
             ((System.ComponentModel.ISupportInitialize)(this.dGVTable)).EndInit();
-            this.gBoxSQL.ResumeLayout(false);
-            this.gBoxSQL.PerformLayout();
             this.gBoxFilters.ResumeLayout(false);
             this.gBoxOrderPrice.ResumeLayout(false);
             this.gBoxOrderPrice.PerformLayout();
@@ -333,10 +281,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn model;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.GroupBox gBoxSQL;
-        private System.Windows.Forms.Label lSQL;
-        private System.Windows.Forms.Button btnSQL;
-        private System.Windows.Forms.TextBox tBoxSQL;
         private System.Windows.Forms.GroupBox gBoxFilters;
         private System.Windows.Forms.Label lProd;
         private System.Windows.Forms.GroupBox gBoxProd;
@@ -349,7 +293,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lBProd;
         private System.Windows.Forms.ListBox lBType;
-        private System.Windows.Forms.Button btnClearSQL;
+        private System.Windows.Forms.Button btnFilter;
     }
 }
 

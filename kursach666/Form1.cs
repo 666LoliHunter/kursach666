@@ -42,11 +42,26 @@ namespace kursach666
         {
             string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;Data Source=megaultralast.mdb";
             OleDbConnection conn = new OleDbConnection(connectionString);
+            string query = "";
+
+
 
             conn.Open();
-            string query = "SELECT * FROM printers" + more_query;
+            if (more_query == "")
+            {
+                query = "SELECT * FROM printers";
+            }
+            else
+            {
+                query = more_query;
+            }
+
+            Console.WriteLine(query);
+
             OleDbCommand cmd = new OleDbCommand(query, conn);
             OleDbDataReader reader = cmd.ExecuteReader();
+            
+            dGVTable.Rows.Clear();
 
             if (reader.HasRows == false)
             {
@@ -109,55 +124,9 @@ namespace kursach666
                 done_query = "select * from printers";
             }
 
-            tBoxSQL.Text = done_query;
-        }
+            load_data(done_query);
 
-        private void btnSQL_Click(object sender, EventArgs e)
-        {
-            ///////////////////////////////////////////////////
-            OleDbConnection conn = OpenConnectionMain();
-            ///////////////////////////////////////////////////
 
-            string query = tBoxSQL.Text;
-
-            OleDbCommand svo = new OleDbCommand(query, conn);
-            try
-            {
-                OleDbDataReader reader = svo.ExecuteReader();
-
-                if (reader.HasRows == false && reader.RecordsAffected == 0)
-                {
-                    MessageBox.Show("Данных нет!", "Ошибка");
-                }
-                else if (reader.RecordsAffected > 0)
-                {
-                    dGVTable.Rows.Clear();
-
-                    ///////////////////////////////////////////////////
-                    CloseConnectionMain(conn, reader);
-                    ///////////////////////////////////////////////////
-
-                    load_data();
-                }
-                else
-                {
-                    dGVTable.Rows.Clear();
-                    while (reader.Read())
-                    {
-                        dGVTable.Rows.Add(reader["id"], reader["prod"], reader["type"],
-                            reader["model"], reader["price"]);
-                    }
-
-                    ///////////////////////////////////////////////////
-                    CloseConnectionMain(conn, reader);
-                    ///////////////////////////////////////////////////
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка в синтаксисе SQL запроса! Отредактируйте запрос " +
-                    "и повторите попытку", "Ошибка");
-            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -229,15 +198,6 @@ namespace kursach666
             GenerateQuery();
         }
 
-        private void tBoxPriceFilter_TextChanged(object sender, EventArgs e)
-        {
-            string query = $"price < {tBoxPriceFilter.Text}";
-
-            subQueryPriceFilter = query;
-
-            GenerateQuery();
-        }
-
         private void btnClearSQL_Click(object sender, EventArgs e)
         {
             subQueryPriceFilter = "";
@@ -246,6 +206,17 @@ namespace kursach666
             subQueryType = "";
 
             GenerateQuery();
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+
+            string query = $"price < {tBoxPriceFilter.Text}";
+
+            subQueryPriceFilter = query;
+
+            GenerateQuery();
+
         }
     }
 }
