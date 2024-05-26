@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace kursach666
 {
-    public partial class Form1 : Form
+    public partial class FormApp : Form
     {
         public string subQueryProd = "";
         public string subQueryType = "";
         public string subQueryOrderPrice = "";
         public string subQueryPriceFilter = "";
-        public Form1()
+        public FormApp()
         {
             InitializeComponent();
             load_data();
@@ -62,6 +62,19 @@ namespace kursach666
             if (reader.HasRows == false)
             {
                 MessageBox.Show("Данных нет!", "Ошибка");
+
+                subQueryOrderPrice = "";
+                subQueryPriceFilter = "";
+                subQueryProd = "";
+                subQueryType = "";
+
+                lBProd.ClearSelected();
+                lBType.ClearSelected();
+                rBOrderPriceDown.Checked = false;
+                rBOrderPriceHigh.Checked = false;
+                tBoxPriceFilter.Text = "";
+
+                load_data();
             }
             else
             {

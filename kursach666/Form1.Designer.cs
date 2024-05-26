@@ -1,6 +1,6 @@
 ﻿namespace kursach666
 {
-    partial class Form1
+    partial class FormApp
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -288,14 +288,14 @@
             this.price.MinimumWidth = 10;
             this.price.Name = "price";
             // 
-            // Form1
+            // FormApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 388);
             this.Controls.Add(this.gBoxFilters);
             this.Controls.Add(this.dGVTable);
-            this.Name = "Form1";
+            this.Name = "FormApp";
             this.Text = "Принтеры";
             ((System.ComponentModel.ISupportInitialize)(this.dGVTable)).EndInit();
             this.gBoxFilters.ResumeLayout(false);
