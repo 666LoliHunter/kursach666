@@ -205,7 +205,7 @@
             this.lBType.Name = "lBType";
             this.lBType.Size = new System.Drawing.Size(76, 43);
             this.lBType.TabIndex = 6;
-            this.lBType.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.lBType.SelectedIndexChanged += new System.EventHandler(this.lBType_SelectedIndexChanged);
             // 
             // lType
             // 

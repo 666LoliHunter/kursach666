@@ -137,11 +137,6 @@ namespace kursach666
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void rBOrderPriceDown_CheckedChanged(object sender, EventArgs e)
         {
             string query = "order by price asc";
@@ -183,7 +178,7 @@ namespace kursach666
             GenerateQuery();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void lBType_SelectedIndexChanged(object sender, EventArgs e)
         {
             string query = "";
 
