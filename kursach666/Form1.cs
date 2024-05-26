@@ -43,10 +43,8 @@ namespace kursach666
             string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;Data Source=megaultralast.mdb";
             OleDbConnection conn = new OleDbConnection(connectionString);
             string query = "";
-
-
-
             conn.Open();
+
             if (more_query == "")
             {
                 query = "SELECT * FROM printers";
@@ -55,8 +53,6 @@ namespace kursach666
             {
                 query = more_query;
             }
-
-            Console.WriteLine(query);
 
             OleDbCommand cmd = new OleDbCommand(query, conn);
             OleDbDataReader reader = cmd.ExecuteReader();
@@ -125,7 +121,6 @@ namespace kursach666
             }
 
             load_data(done_query);
-
 
         }
 
@@ -210,13 +205,42 @@ namespace kursach666
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            string query = "";
 
-            string query = $"price < {tBoxPriceFilter.Text}";
+            if (tBoxPriceFilter.Text.Length > 0)
+            {
+                query = $"price < {tBoxPriceFilter.Text}";
+            }
+            else
+            {
+                query = "";
+            }
 
             subQueryPriceFilter = query;
 
             GenerateQuery();
 
+        }
+
+        private void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            subQueryOrderPrice = "";
+            subQueryPriceFilter = "";
+            subQueryProd = "";
+            subQueryType = "";
+
+            lBProd.ClearSelected();
+            lBType.ClearSelected();
+            rBOrderPriceDown.Checked = false;
+            rBOrderPriceHigh.Checked = false;
+            tBoxPriceFilter.Text = "";
+
+            load_data();
+        }
+
+        private void btnSendQuery_Click(object sender, EventArgs e)
+        {
+            GenerateQuery();
         }
     }
 }
